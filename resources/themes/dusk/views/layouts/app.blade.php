@@ -23,6 +23,14 @@
         <div id="app" class="min-h-screen bg-[#262a35] relative">
             <x-messages.flash-messages />
 
+            @if (auth()->guest() && config('habbo.members_only'))
+                {{-- Guests can only log in, so the menu would only lead back here --}}
+                <header class="nav-header relative z-30">
+                    <div class="max-w-7xl w-full flex justify-center items-center min-h-[60px] px-5 lg:h-[120px] xl:px-0">
+                        <img src="{{ setting('cms_logo') }}" alt="{{ setting('hotel_name') }}">
+                    </div>
+                </header>
+            @else
             <x-navigation.navigation-menu />
 
             {{-- Sub header --}}
@@ -75,6 +83,7 @@
                    </div>
                 </div>
             </div>
+            @endif
 
             {{-- Site background --}}
             <div class="site-bg w-full"></div>

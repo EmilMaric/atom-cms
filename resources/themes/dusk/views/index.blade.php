@@ -1,8 +1,10 @@
 <x-app-layout>
     @push('title', __('Welcome to the best hotel on the web!'))
 
+    {{-- Members only: just the login form, no registering and nothing about the hotel --}}
+    @php($membersOnly = config('habbo.members_only'))
 
-    <div class="col-span-12 md:col-span-6 min-h-[250px] bg-gray-900/50 rounded-xl flex flex-col py-6 px-8 text-white">
+    <div @class(['col-span-12 md:col-span-6 min-h-[250px] bg-gray-900/50 rounded-xl flex flex-col py-6 px-8 text-white', 'md:col-start-4' => $membersOnly])>
         <h2 class="text-2xl">{{ __('Login') }}</h2>
 
         <form action="{{ route('login') }}" method="POST">
@@ -21,13 +23,16 @@
             <div class="mt-4 flex gap-4">
                 <button type="submit" class="py-2 px-4 text-white bg-yellow-500 border-2 border-yellow-300 w-full rounded-md transition duration-300 ease-in-out hover:scale-[102%]">{{ __('Login') }}</button>
 
+                @unless ($membersOnly)
                 <a href="{{ route('register') }}" class="w-full">
                     <button type="button" class="py-2 px-4 text-white bg-gray-700 border-2 border-gray-600 w-full rounded-md transition duration-300 ease-in-out hover:scale-[102%]">{{ __('Register') }}</button>
                 </a>
+                @endunless
             </div>
         </form>
     </div>
 
+    @unless ($membersOnly)
     {{-- Articles --}}
     <div class="col-span-12 md:col-span-6 h-[250px]">
         <!-- Slider main container -->
@@ -108,4 +113,5 @@
         usernameInput.addEventListener('keyup', updateAvatar);
 
     </script>
+    @endunless
 </x-app-layout>

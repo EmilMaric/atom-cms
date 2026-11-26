@@ -16,6 +16,7 @@ use App\Http\Middleware\HandleCors;
 use App\Http\Middleware\InstallationMiddleware;
 use App\Http\Middleware\LocalizationMiddleware;
 use App\Http\Middleware\MaintenanceMiddleware;
+use App\Http\Middleware\MembersOnly;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\SecurityHeaders;
@@ -76,6 +77,7 @@ class Kernel extends HttpKernel
             AuthenticateSession::class,
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
+            MembersOnly::class,
             SubstituteBindings::class,
             LocalizationMiddleware::class,
         ],
@@ -84,6 +86,7 @@ class Kernel extends HttpKernel
             EnsureFrontendRequestsAreStateful::class,
             ApiLocale::class,
             ThrottleRequests::class . ':api',
+            MembersOnly::class,
             SubstituteBindings::class,
         ],
     ];

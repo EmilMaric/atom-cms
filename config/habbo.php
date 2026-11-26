@@ -24,6 +24,13 @@ return [
     */
     'trusted_proxies' => env('TRUSTED_PROXIES', '*'),
 
+    /*
+    | Members only: visitors who aren't logged in only get the login page, and
+    | every other page and API endpoint sends them to it. Registering is off,
+    | so staff create accounts in housekeeping.
+    */
+    'members_only' => env('MEMBERS_ONLY', false),
+
     'reactions' => [
         'bad', 'crying', 'good', 'happy', 'taut', 'impatient', 'inlove', 'laugh', 'proud', 'wow',
         'shameful', 'shameless', 'sleeping', 'smile', 'tongue', 'wink', 'disgusted', 'angry', 'lgbt', 'heart2', 'bobba', 'poop',
